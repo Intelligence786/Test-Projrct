@@ -7,7 +7,7 @@ public class Debuff
 {
     public int debuffAmount = 0;
     public int debuffTurnCount = 0;
-
+   
     public Debuff(int debuffAmount, int debuffTurnCount)
     {
         this.debuffAmount = debuffAmount;
@@ -15,16 +15,15 @@ public class Debuff
     }
 
     public event Action<int> onDebuffUse = delegate { };
-
+    public event Action onDebuffEnd = delegate { };
     public void DebuffUse()
     {
+        onDebuffUse(debuffAmount);
+        debuffTurnCount--;
+
         if (debuffTurnCount > 0)
         {
-            onDebuffUse(debuffAmount);
-            debuffTurnCount--;
-        }
-        else
-        {
+            onDebuffEnd();
             GC.SuppressFinalize(this);
         }
     }

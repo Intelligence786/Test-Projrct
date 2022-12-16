@@ -2,11 +2,14 @@
 using UnityEngine;
 using System;
 using TMPro;
+using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
     [SerializeField]
     private TMP_Text healthText;
+
+   
 
     private void Awake()
     {
@@ -21,5 +24,5 @@ public class HealthBar : MonoBehaviour
             healthText.text = $"{amount} HP";
     }
 
-
+  
 }

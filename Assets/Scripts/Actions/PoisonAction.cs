@@ -16,9 +16,12 @@ public class PoisonAction : ActionBase
         {
             Debuff debuff = new Debuff(poisionAmount, activeTurn);
             character.Damage(damageAmount);
+            Poision poision = character.GetComponent<Poision>();
+
+            poision.ActivatePoisionImage(true);
 
             debuff.onDebuffUse += character.Damage;
-
+            debuff.onDebuffEnd += (() => { poision.ActivatePoisionImage(false); });
             character.Debuff(debuff);
             DestroyAction();
         }
